@@ -28,6 +28,7 @@ my $orig_dir = getcwd();
 unshift @INC, $orig_dir;
 
 use PGBuild::Options;
+use PGBuild::Utils;
 
 # older msys is ging to use a different perl to run LWP, so we can't absolutely
 # require this module there
@@ -228,7 +229,7 @@ sub find_last_status
 	my $status_file =
 	  "$PGBuild::conf{build_root}/$brnch/$PGBuild::conf{animal}.last.status";
 	return 0 unless (-e $status_file);
-	my $ts = file_contents($status_file);
+	my $ts = PGBuild::Utils::file_contents($status_file);
 	chomp $ts;
 	return $ts + 0;
 }
